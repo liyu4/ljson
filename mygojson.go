@@ -184,6 +184,13 @@ func (j *Js) ToArray() (k, d []string) {
 	return nil, nil
 }
 
+func (j *Js) Array() ([]interface{}, error) {
+	if a, ok := (j.data).([]interface{}); ok {
+		return a, nil
+	}
+	return nil, errors.New("type assertion to []interface{} failed")
+}
+
 func (j *Js) StringtoArray() []string {
 	var data []string
 	for _, v := range j.data.([]interface{}) {
