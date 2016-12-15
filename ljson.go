@@ -111,21 +111,20 @@ func (j *Js) ArrayIndex(i int) (string, error) {
 }
 
 // The data must be []interface{}, According to your custom number to return key adn array data
-func (j *Js) GetKey(key string, i int) *Js {
+func (j *Js) GetKey(key string, i int) (*Js, error) {
 	num := i - 1
 	if i > len((j.data).([]interface{})) {
-		j.data = errors.New("index out of range list").Error()
-		return j
+		return nil, errors.New("index out of range list")
 	}
 	if m, ok := (j.data).([]interface{}); ok {
 		v := m[num].(map[string]interface{})
 		if h, ok := v[key]; ok {
 			j.data = h
-			return j
+			return j, nil
 		}
 	}
 	j.data = nil
-	return j
+	return j, nil
 }
 
 // According to the custom of the PATH to fing element
