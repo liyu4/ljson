@@ -52,8 +52,12 @@ func (j *Js) GetMapData() map[string]interface{} {
 func (j *Js) GetIndex(i int) *Js {
 	num := i - 1
 	if m, ok := (j.data).([]interface{}); ok {
-		v := m[num]
-		j.data = v
+		if num <= len(m)-1{
+	             v := m[num]
+		     j.data = v		
+		}else{
+		     j.data = nil
+		}
 		return j
 	}
 
